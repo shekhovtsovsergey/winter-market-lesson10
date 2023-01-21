@@ -46,4 +46,10 @@ public class Cart {
             totalPrice = totalPrice.add(item.getPrice());
         }
     }
+
+    public void addItem(CartItem cartItem) {
+        items.add(cartItem);
+        recalculate();
+    }
+
 }
