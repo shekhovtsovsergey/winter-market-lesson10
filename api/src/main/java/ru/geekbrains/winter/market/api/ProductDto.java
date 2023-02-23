@@ -1,7 +1,11 @@
 package ru.geekbrains.winter.market.api;
 
+import lombok.Builder;
+
 import java.math.BigDecimal;
 
+
+@Builder
 public class ProductDto {
     private Long id;
     private String title;
