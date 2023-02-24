@@ -8,6 +8,13 @@ spring:
     url: jdbc:h2:mem:mydatabase;MODE=PostgreSQL
     username: sa
     password:
+  main:
+    allow-circular-references: true
+  mail:
+    host: smtp.rambler.ru
+    port: 587
+    username: medappsuppor
+    password: WE37NBqfphPeZWXMXYOmKcbILmd7dr
   jpa:
     show-sql: true
     properties:
