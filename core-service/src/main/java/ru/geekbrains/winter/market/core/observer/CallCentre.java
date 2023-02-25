@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 public class CallCentre implements Observed {
 
-    List<Listner> observers = new ArrayList<>();
+    List<Listner> observers;
 
     public CallCentre(List<Listner> observers) {
         this.observers = observers;
