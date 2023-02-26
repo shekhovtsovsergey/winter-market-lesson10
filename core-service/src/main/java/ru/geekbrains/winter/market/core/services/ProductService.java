@@ -7,12 +7,12 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ru.geekbrains.winter.market.api.ProductDto;
 import ru.geekbrains.winter.market.api.ResourceNotFoundException;
+import ru.geekbrains.winter.market.core.converters.ProductConverter;
 import ru.geekbrains.winter.market.core.entities.Category;
 import ru.geekbrains.winter.market.core.entities.Product;
 import ru.geekbrains.winter.market.core.repositories.ProductRepository;
 import ru.geekbrains.winter.market.core.repositories.specifications.ProductsSpecifications;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,13 +20,23 @@ import java.util.Optional;
 public class ProductService {
     private final ProductRepository productRepository;
     private final CategoryService categoryService;
+    private final IdentityMap identityMap;
+    private final ProductConverter productConverter;
 
     public Page<Product> findAll(Specification<Product> spec, int page) {
         return productRepository.findAll(spec, PageRequest.of(page, 5));
     }
 
     public Optional<Product> findById(Long id) {
-        return productRepository.findById(id);
+        try {
+            if (identityMap.isInto(id)==null){
+                Optional<Product> product = productRepository.findById(id);
+                identityMap.add(product);
+                return product;
+            } else return identityMap.isInto(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void deleteById(Long id) {
