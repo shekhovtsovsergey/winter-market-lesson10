@@ -10,7 +10,6 @@ import ru.geekbrains.winter.market.core.entities.Product;
 import ru.geekbrains.winter.market.core.services.ProductService;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/products")
